@@ -1,0 +1,29 @@
+{
+  "name": "codebadge",
+  "version": "1.0.0",
+  "description": "Community sustainer",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TG1999/Codebadge.git"
+  },
+  "keywords": [
+    "community",
+    "badge"
+  ],
+  "author": "TG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TG1999/Codebadge/issues"
+  },
+  "homepage": "https://github.com/TG1999/Codebadge#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.22",
+    "node-schedule": "^1.3.2"
+  }
+}
