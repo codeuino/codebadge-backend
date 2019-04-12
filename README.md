@@ -1,8 +1,8 @@
-#About Codebadge
+# About Codebadge
 ---
 Well we all have been working in Open Source and committing various Pull requests and issues. Many a times it may happen that a mentor is unanle to manage all these activities. So This project is about tracking the contributor as well as its contribution by respective mentors.
 
-###Features
+### Features
 
  - Easy to monitor the activities of various contributors.
  - Visibility of top contributors in various projects.
@@ -17,19 +17,19 @@ The other part of this project includes the “notifying moderator” since we s
  - They could not reach to expectation
 So this will help the maintainers get notified when they see these people inactive.
 
-##How does it work
+## How does it work
 ---
 For instance, suppose a contributor “X” has been quite active within the community by working on various PRs, opening and resolving various issues, active on chat channels but after a month “X” gets disappeared. So by using this dashboard they will have a badge interface. There will be a badge attached in front of the name of the contributor. Let the name of the badge be “Y” so this badge will have a unique color. So as the time passes like “ a day went, 1 week went, 2 weeks went, a month, etc) this badges will get keep on fading. And Every fade color will have a unique reason. For example, when a contributor made a PR, the badge appeared “Red” in color. This badge will remain in the same color as long as he/she is contributing. Assume that contributor stops contributing and has not contributed for a week so his badge will become green in color. And this will keep on notifying mainaters, Admins about their disappearing. This way the organisations will have greater eye on the contributors and can help them sustain with the community.
 
-##Stack used
+## Stack used
 ---
 This will have a dashboard, where these things can be placed. The stack used can be any but since the organisation have fixed stack so its better to stick to Nodejs, Vue, React.
 
-##Benefits to the community
+## Benefits to the community
 ---
 Different communities or programs like “GirlScript Summer of Code, Codeheat, GSOC, etc would be able to track their contributors and this project will help them by not losing potential contributors and select the best from all potential candidates.
 
-##Contributions Best Practices
+## Contributions Best Practices
 ---
 **Commits**
 
