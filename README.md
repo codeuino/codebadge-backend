@@ -1,5 +1,4 @@
 # About Codebadge
----
 Well we all have been working in Open Source and committing various Pull requests and issues. Many a times it may happen that a mentor is unanle to manage all these activities. So This project is about tracking the contributor as well as its contribution by respective mentors.
 
 ### Features
