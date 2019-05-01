@@ -10,6 +10,15 @@ var user=new schema({
     badgecolor:{
         type:String,
         default:'green'
+    },
+    last_week_contributions:{
+        type:Number
+    },
+    total_contributions:{
+        type:Number
+    },
+    badges:{
+        type:[String]
     }
 })
 const user=mongoose.model('user',user);
