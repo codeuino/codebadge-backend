@@ -5,7 +5,7 @@
 ![Language Count](https://img.shields.io/github/languages/count/PrabhaniN/codebadge.svg)
 [![License](https://img.shields.io/github/license/PrabhaniN/codebadge.svg)](https://github.com/PrabhaniN/Codebadge/blob/master/LICENSE)
 
-Well we all have been working in Open Source and committing various Pull requests and issues. Many a times it may happen that a mentor is unanle to manage all these activities. So This project is about tracking the contributor as well as its contribution by respective mentors.
+Well we all have been working in Open Source and committing various Pull requests and issues. Many a times it may happen that a mentor is unable to manage all these activities. So This project is about tracking the contributor as well as its contribution by respective mentors.
 
 ### Features
 
@@ -18,7 +18,7 @@ Well we all have been working in Open Source and committing various Pull request
 The other part of this project includes the “notifying moderator” since we see sometimes that there are many PRs being sent, or issues being opened by various people across the globe but there are limited numbers of maintainers merging the PRs. This way organisations usually lose their potential contributors due to following things:
 
 - Their PRs are not being merged
-- They finds difficulty in understanding the issue
+- They find difficulty in understanding the issue
 - They could not reach to expectation
   So this will help the maintainers get notified when they see these people inactive.
 
@@ -32,7 +32,7 @@ This will have a dashboard, where these things can be placed. The stack used can
 
 ## Benefits to the community
 
-Different communities or programs like “GirlScript Summer of Code, Codeheat, GSOC, etc would be able to track their contributors and this project will help them by not losing potential contributors and select the best from all potential candidates.
+Different communities or programs like GirlScript Summer of Code, Codeheat, GSOC, etc would be able to track their contributors and this project will help them by not losing potential contributors and select the best from all potential candidates.
 
 ## Contributions Best Practices
 
