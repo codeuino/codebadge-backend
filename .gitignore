@@ -80,3 +80,12 @@ typings/
 # Config files
 credential.js
 secret.js
+
+# Node modules
+node_modules/
+
+# Build Files
+dist/
+
+# Config files
+.prettierrc.js
