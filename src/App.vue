@@ -2,6 +2,7 @@
   <v-app>
     <v-toolbar color="white" app>
       <v-toolbar-title class="headline text-uppercase">
+        <a href='http://localhost:8080/upload'>upload file</a>
         <span>Codebadge</span>
         <span class="font-weight-light text-none">&nbsp;(Production Stage)</span>
       </v-toolbar-title>
@@ -28,5 +29,8 @@ export default {
 <style lang="scss" >
 .content {
   background-color: white;
+}
+a{
+  float:right;
 }
 </style>
