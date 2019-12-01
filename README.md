@@ -14,6 +14,8 @@ Well we all have been working in Open Source and committing various Pull request
 - Real time tracking of commits, PR's and other contributions.
 - Contributors list based on number of PR's, merged pulls and other activities.
 - Contribution history of each contributor.
+can create a badge for your organization.]
+- upload and use the templates
 
 The other part of this project includes the “notifying moderator” since we see sometimes that there are many PRs being sent, or issues being opened by various people across the globe but there are limited numbers of maintainers merging the PRs. This way organisations usually lose their potential contributors due to following things:
 
@@ -26,9 +28,25 @@ The other part of this project includes the “notifying moderator” since we s
 
 For instance, suppose a contributor “X” has been quite active within the community by working on various PRs, opening and resolving various issues, active on chat channels but after a month “X” gets disappeared. So by using this dashboard they will have a badge interface. There will be a badge attached in front of the name of the contributor. Let the name of the badge be “Y” so this badge will have a unique color. So as the time passes like “ a day went, 1 week went, 2 weeks went, a month, etc) this badges will get keep on fading. And Every fade color will have a unique reason. For example, when a contributor made a PR, the badge appeared “Red” in color. This badge will remain in the same color as long as he/she is contributing. Assume that contributor stops contributing and has not contributed for a week so his badge will become green in color. And this will keep on notifying mainaters, Admins about their disappearing. This way the organisations will have greater eye on the contributors and can help them sustain with the community.
 
+## Install and Run
+
+**Step 1:-** clone the repository
+
+``` git clone https://github.com/username/Codebadge.git ``` 
+**Step 2:-** install frontend dependencies and run frontend server
+``` npm install && npm run serve```
+**Step 3:-** install flask api dependencies and run api
+``` 
+cd backend
+virtualenv -p python3 venv
+source venv/bin/activate
+pip install -r requirements.txt
+FLASK_APP=run.py flask run
+```
+
 ## Stack used
 
-This will have a dashboard, where these things can be placed. The stack used can be any but since the organisation have fixed stack so its better to stick to Nodejs, Vue, React.
+This will have a dashboard, where these things can be placed. The stack used can be any but since the organisation have fixed stack so its better to stick to Nodejs, Vue, React. Flask is used as an machine learning api.
 
 ## Benefits to the community
 
