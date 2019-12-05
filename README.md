@@ -28,11 +28,11 @@ For instance, suppose a contributor “X” has been quite active within the com
 
 ## Stack used
 
-This will have a dashboard, where these things can be placed. The stack used can be any but since the organisation have fixed stack so its better to stick to Nodejs, Vue, React.
+Codebadge has a dashboard, where these badges are placed. Any stack could be used but since the organizations have fixed stacks its better to stick with Nodejs, Vue, and React.
 
 ## Benefits to the community
 
-Different communities or projects like GirlScript, Summer of Code, Codeheat, GSOC, etc. Will be able to track their contributors and this project will help them by not losing potential contributors and select the best from all potential candidates.
+Different communities or projects like GirlScript, Summer of Code, Codeheat, GSOC, etc. Will be able to track their contributors and this project will help them not lose potential contributors and select the best from all potential candidates.
 
 ## Contributions Best Practices
 
