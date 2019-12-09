@@ -14,7 +14,6 @@
 
 <script>
 import axios from 'axios';
-import AuthHelper from '../../config/AuthHelper';
 import AxiosHelper from '../../config/AxiosHelper';
 
 export default {
@@ -27,19 +26,27 @@ export default {
   methods: {
     login() {
       window.location = `${AxiosHelper.authUrl}?client_id=${
-        AuthHelper.clientId
+        process.env.VUE_APP_CLIENT_ID
       }&scope=user%20repo%20read:org`;
     }
   },
-  created() {
+  created: function() {
     const code = window.location.href.match(/\?code=(.*)/);
     if (code) {
       this.isLoading = true;
-      axios
-        .get(`${AxiosHelper.gatekeeperUrl}/${code[1].slice(0, 20)}`)
-        .then(res => {
+      console.log(this.isLoading);
+      axios({
+        method: `post`,
+        url: `${AxiosHelper.gatekeeperUrl}?client_id=${
+          process.env.VUE_APP_CLIENT_ID
+        }&client_secret=${
+          process.env.VUE_APP_CLIENT_SECRET
+        }&code=${code[1].slice(0, 20)}`
+      }).then(res => {
           this.isLoading = false;
-          localStorage.setItem('token', res.data.token);
+          var token = res.data.match(/access_token=(.*)/)[1].slice(0,40);
+          console.log("access_token:" + token);
+          localStorage.setItem('token', token);
           window.location = AxiosHelper.homeUrl;
         })
         .catch(err => {

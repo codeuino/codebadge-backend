@@ -26,6 +26,17 @@ The other part of this project includes the “notifying moderator” since we s
 
 For instance, suppose a contributor “X” has been quite active within the community by working on various PRs, opening and resolving various issues, active on chat channels but after a month “X” gets disappeared. So by using this dashboard they will have a badge interface. There will be a badge attached in front of the name of the contributor. Let the name of the badge be “Y” so this badge will have a unique color. So as the time passes like “ a day went, 1 week went, 2 weeks went, a month, etc) this badges will get keep on fading. And Every fade color will have a unique reason. For example, when a contributor made a PR, the badge appeared “Red” in color. This badge will remain in the same color as long as he/she is contributing. Assume that contributor stops contributing and has not contributed for a week so his badge will become green in color. And this will keep on notifying mainaters, Admins about their disappearing. This way the organisations will have greater eye on the contributors and can help them sustain with the community.
 
+## Setting up the project
+To set up the project, carry out the following steps:
+- Clone/download the project locally
+- Create an [oAuth](https://github.com/settings/developers) application if you haven't already
+- Make sure that the callback-url is set to `http://localhost:8080/#/auth`
+- Make an `.env` file in the root folder of the project (where package.json is)
+- Add the code given below and replace it with values from your oAuth application:
+`VUE_APP_CLIENT_ID=<client id>`
+`VUE_APP_CLIENT_SECRET=<client secret>`
+- Run the app using `npm start serve`
+
 ## Stack used
 
 This will have a dashboard, where these things can be placed. The stack used can be any but since the organisation have fixed stack so its better to stick to Nodejs, Vue, React.
