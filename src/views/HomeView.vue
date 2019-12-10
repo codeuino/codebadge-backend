@@ -2,6 +2,7 @@
   <div>
     <v-layout class="ma-5" justify-center>
       <div v-if="!isLoading">
+        <div><a href = "/newBadge">Create a New Badge</a></div>
         <UserDetails/>
         <div class="mt-5 orgs">Organizations</div>
         <OrgList/>
