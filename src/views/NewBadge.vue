@@ -1,12 +1,22 @@
 <template>
   <div class = "mt-5 orgs">
-  <h1><b>Create a New Badge!</b></h1>
+  <h1>
+    <center><b>Create a New Badge!</b></center>
+    </h1>
     <v-layout class="ma-5" justify-center>
-      <canvas width="900" height="600">
+      <canvas id = "newCanvas" width="900" height="600">
       </canvas>
     </v-layout>
   </div>
 </template>
+
+<script>
+function draw() {
+        var canvas = document.getElementById('newCanvas');
+        if (canvas.getContext) {
+          var ctx = newCanvas.getContext('2d');
+        }
+</script>
 
 <style>
 canvas {
