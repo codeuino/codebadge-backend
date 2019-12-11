@@ -23,7 +23,7 @@ canvas {
     background-color: white;
     margin: auto;
     display: block;
-    border: 3px solid gray;
+    border: 2px solid gray;
     border-radius: 2px;
 }
 </style>
