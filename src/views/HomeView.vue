@@ -2,7 +2,12 @@
   <div>
     <v-layout class="ma-5" justify-center>
       <div v-if="!isLoading">
-        <div><a href = "/newBadge">Create a New Badge</a></div>
+        <v-btn class="btn-login" v-if="isLoading" outline>
+        <a href = "#/newbadge">
+          <button data-v-6bab3132="" type="button" class="btn-login v-btn v-btn--outline v-btn--depressed theme--light">
+            <div class="v-btn__content">Create a New Badge</div
+         </a>
+          </button>
         <UserDetails/>
         <div class="mt-5 orgs">Organizations</div>
         <OrgList/>
@@ -41,5 +46,9 @@ export default {
 <style lang="scss" scoped>
 .orgs {
   font-size: 20px;
+},
+
+A {
+  text-decoration: none;
 }
 </style>
