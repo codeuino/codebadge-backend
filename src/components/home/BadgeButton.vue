@@ -6,3 +6,13 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'BadgeButton',
+  data() {
+    return {
+      isLoading: false
+    };
+  },
+};
+</script>
