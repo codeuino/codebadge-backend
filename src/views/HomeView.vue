@@ -2,12 +2,7 @@
   <div>
     <v-layout class="ma-5" justify-center>
       <div v-if="!isLoading">
-        <v-btn class="btn-login" v-if="isLoading" outline>
-        <a href = "#/newbadge">
-          <button data-v-6bab3132="" type="button" class="btn-login v-btn v-btn--outline v-btn--depressed theme--light">
-            <div class="v-btn__content">Create a New Badge</div></button>
-         </a>
-         </v-btn>
+        <BadgeButton/>
         <UserDetails/>
         <div class="mt-5 orgs">Organizations</div>
         <OrgList/>
