@@ -47,7 +47,7 @@ export default {
 <style lang="scss" scoped>
 .orgs {
   font-size: 20px;
-},
+}
 
 A {
   text-decoration: none;
