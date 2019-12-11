@@ -16,6 +16,7 @@ function draw() {
         if (canvas.getContext) {
           var ctx = newCanvas.getContext('2d');
         }
+}
 </script>
 
 <style>
