@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\public",
+    "\\src",
+    "\\src\\assets",
+    "\\src\\assets\\newBadgeButtons",
+    "\\src\\components",
+    "\\src\\components\\auth",
+    "\\src\\components\\home",
+    "\\src\\components\\newBadge",
+    "\\src\\views"
+  ],
+  "SelectedNode": "\\src",
+  "PreviewInSolutionExplorer": false
+}

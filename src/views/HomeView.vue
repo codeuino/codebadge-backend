@@ -2,9 +2,12 @@
   <div>
     <v-layout class="ma-5" justify-center>
       <div v-if="!isLoading">
-        <div class="mt-5 orgs"><a href="#/newbadge">Create a New Badge</a></div>
+        <v-btn style="margin-bottom: 30px;">
+          <a href="#/newbadge">Create a New Badge</a>
+        </v-btn>
         <UserDetails/>
-        <div class="mt-5 orgs">Organizations</div>
+        <div class="mt-5 orgs">
+          <center>Organizations</center></div>
         <OrgList/>
       </div>
       <div v-if="isLoading">
@@ -39,11 +42,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.orgs {
+  .orgs {
   font-size: 20px;
-}
+  }
 
-A {
-  text-decoration: none;
-}
+  A {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  }
 </style>
