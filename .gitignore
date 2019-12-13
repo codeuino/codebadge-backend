@@ -86,6 +86,8 @@ node_modules/
 
 # Build Files
 dist/
+backend/venv/
+backend/__pycache__/
 
 # Config files
 .prettierrc.js
