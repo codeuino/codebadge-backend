@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import AuthView from './views/AuthView';
 import HomeView from './views/HomeView';
+import NewBadge from './views/NewBadge';
 import OrgView from './views/OrgView';
 import Upload from "./views/Upload.vue";
 import AuthService from './services/authService';
@@ -32,6 +33,14 @@ export default new Router({
             beforeEnter: (to, from, next) => {
                 next(authService.isLoggedIn());
             }
+        },
+        {
+            path:'/newBadge',
+            name: 'newBadge',
+            component: NewBadge,
+            beforeEnter: (to, from, next) => {
+                    next(authService.isLoggedIn());
+             }
         },
         {
             path: '/org/:name',
