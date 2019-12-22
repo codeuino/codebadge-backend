@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card flat ripple>
-      <v-layout justify-center row>
+      <v-layout row>
         <v-avatar size="80">
           <img :src="dp">
         </v-avatar>

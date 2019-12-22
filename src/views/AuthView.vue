@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="login-menu">
-      <v-container style="widh=200px;">
+      <v-container>
         <v-layout class="header1" justify-center>Welcome to CodeBadge!</v-layout>
         <v-layout class="header2" justify-center>TRACK ALL YOUR PROJECTS AT ONE PLACE</v-layout>
         <v-layout class="text1" justify-center>
           Having a hard time tracking all your project contributors?
         </v-layout>
-        <v-layout class="text1" style="padding-top:0px;" justify-center>CodeBadge does it for you!
+        <v-layout class="text2" justify-center>CodeBadge does it for you!
         </v-layout>
         <v-layout class="ma-3" align-center justify-center>
           <Login />
@@ -46,6 +46,11 @@ export default {
 
 .text1 {
   padding-top: 25px;
+  font-family: 'Roboto Condensed';
+  font-size: 20px;
+}
+
+.text2 {
   font-family: 'Roboto Condensed';
   font-size: 20px;
 }

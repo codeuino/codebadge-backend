@@ -1,69 +1,102 @@
 <template>
   <div>
-    <v-list-tile avatar>
-      <!-- <div> -->
-      <v-layout justify-space-between>
-        <div>
-          <v-list-tile-title v-html="author"></v-list-tile-title>
+    <v-list class="contributor-list">
+      <v-list-tile>
+        <v-list-tile-avatar>
+          <v-avatar size="48" class="avatar">
+            <v-img class="elevation-4" :src="avatar" />
+          </v-avatar>
+        </v-list-tile-avatar>
+        <v-list-tile-content>
+          <v-list-tile-title v-html="name"></v-list-tile-title>
+        </v-list-tile-content>
+
+        <div class="mr-1 badge-holder">
+          <v-avatar class="elevation-2 badge" size="32">
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-img v-on="on" v-on:click="redirect()" :src="predefinedBadge.url" />
+              </template>
+              <span>{{ predefinedBadge.tooltip }}</span>
+            </v-tooltip>
+          </v-avatar>
+          <v-avatar
+            class="elevation-2 badge"
+            size="32"
+            v-for="badgedata in specialBadges"
+          >
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-img v-on="on" v-on:click="redirect()" class="elevation-2" :src="badgedata.url" />
+              </template>
+              <span>{{ badgedata.tooltip }}</span>
+            </v-tooltip>
+          </v-avatar>
         </div>
-        <div class="mx-5">
-          <div class="badge-simple" :style="{backgroundColor: getColor()}"></div>
-        </div>
-      </v-layout>
-      <!-- </div> -->
-      <!-- <div>
-        <v-list-tile-title>{ Total commits: {{total}}, Last commit: {{getLastWeek()}} week(s) ago }</v-list-tile-title>
-      </div>-->
-    </v-list-tile>
+      </v-list-tile>
+    </v-list>
   </div>
 </template>
 
 <script>
+import PredefinedBadges from "../../assets/badges/predefined/predefinedBadges";
+import SpecialBadges from "../../assets/badges/special/specialBadges";
+
+const predefinedBadges = new PredefinedBadges();
+const specialBadges = new SpecialBadges();
+
 export default {
-  name: 'ContributorItem',
+  name: "ContributorItem",
   props: {
-    author: {
+    name: {
       type: String
     },
-    weeks: {
-      type: Array
-    },
-    total: {
-      type: Number
+    orgName: {
+      type: String
     }
   },
   data() {
     return {
-      reversedWeeks: this.weeks.reverse()
+      userData: this.$store.getters.getUserOrgCommits({
+        name: this.name,
+        orgName: this.orgName
+      })
     };
   },
-  methods: {
-    getLastWeek() {
-      return this.reversedWeeks.findIndex(week => week.c != 0);
+  computed: {
+    predefinedBadge() {
+      let data = predefinedBadges.getBadge(this.userData.total);
+      return data;
     },
-    getColor() {
-      let value = this.getLastWeek();
-
-      if (value == 1) return '#1B5E20';
-      else if (value == 2) return '#2E7D32';
-      else if (value == 3) return '#66BB6A';
-      else if (3 < value && value <= 5) return '#A5D6A7';
-      else if (5 < value && value <= 8) return '#FFF9C4';
-      else if (8 < value && value <= 16) return '#FFF176';
-      else if (16 < value && value <= 32) return '#F9A825';
-      else if (32 < value && value <= 56) return '#FF6F00';
-      else if (56 < value && value <= 84) return '#E65100';
-      else if (84 < value && value <= 112) return '#FF3D00';
-      else if (112 < value) return '#78909C';
+    specialBadges() {
+      return specialBadges.getBadges(this.name, this.orgName);
+    },
+    avatar() {
+      return this.userData.avatar;
+    }
+  },
+  methods: {
+    redirect() {
+      this.$router.push({ name: "badgeList"});
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.badge-simple {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
+.contributor-list {
+  width: auto;
+}
+
+.avatar {
+  padding-right: 10px;
+}
+
+.badge-holder {
+  margin-left: 70px;
+}
+
+.badge {
+  margin-left: 3px;
 }
 </style>
