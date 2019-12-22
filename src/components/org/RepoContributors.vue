@@ -1,25 +1,28 @@
 <template>
   <div>
-    <div v-for="contributor in contributors" :key="contributor.author.id">
+    <div
+      v-for="contributor in contributors"
+      :key="contributor.author.id"
+      class="contributors"
+    >
       <ContributorItem
-        :author="contributor.author.login"
-        :weeks="contributor.weeks"
-        :total="contributor.total"
+        :name="contributor.author.login"
+        :orgName="orgName"
       />
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import ContributorItem from './ContributorItem';
-import AxiosHelper from '../../config/AxiosHelper';
-import AuthService from '../../services/authService';
+import axios from "axios";
+import ContributorItem from "./ContributorItem";
+import AxiosHelper from "../../config/AxiosHelper";
+import AuthService from "../../services/authService";
 
 const authService = new AuthService();
 
 export default {
-  name: 'RepoContributors',
+  name: "RepoContributors",
   data() {
     return {
       contributors: []
@@ -40,17 +43,23 @@ export default {
     loadContributors() {
       axios
         .get(
-          `${AxiosHelper.baseUrl}/repos/${this.orgName}/${
-            this.repoName
-          }/stats/contributors`,
+          `${AxiosHelper.baseUrl}/repos/${this.orgName}/${this.repoName}/stats/contributors`,
           {
             headers: {
               Authorization: `token ${authService.getToken()}`
             }
           }
         )
-        .then(res => (this.contributors = res.data))
+        .then(res => {
+          this.sortContributors(res.data);
+          this.contributors = res.data;
+        })
         .catch(err => console.log(err));
+    },
+    sortContributors(contributors) {
+      contributors.sort(function(a, b) {
+        return b.total - a.total;
+      });
     }
   },
   created() {
@@ -60,13 +69,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.badge {
-  width: 20px;
-  height: 20px;
-}
-table,
-th,
-td {
-  border: 1px solid black;
+.contributors {
+  padding-left: 25px;
 }
 </style>
