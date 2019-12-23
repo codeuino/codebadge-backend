@@ -91,3 +91,6 @@ backend/__pycache__/
 
 # Config files
 .prettierrc.js
+
+#Visual Studio
+/.vs
