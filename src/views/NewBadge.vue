@@ -12,7 +12,6 @@
               <canvas id = "canvas" width="900" height="600">
               </canvas>
           </div>
-        </div>
         <ToolButtons/>
       </div>
     </body>
@@ -63,11 +62,12 @@
 
   let shouldPaint = false;
 
-  function startDrawing() {
+  function startDrawing(event) {
   shouldPaint = true;
   var mousePos = getMousePos(canvas, event);
   ctx.moveTo(mousePos.x, mousePos.y);
   ctx.beginPath()
+  continueDrawing(event);
   }
 
   function continueDrawing(event) {
