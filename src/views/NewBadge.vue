@@ -47,6 +47,9 @@
   const canvas = document.getElementById("canvas");
 
   const ctx = canvas.getContext("2d");
+  canvas.backgroundColor = "#ffffff";
+  let haveColor = true;
+  let pencilColor;
 
   function getMousePos(canvas, event) {
   var rect = canvas.getBoundingClientRect();
@@ -86,6 +89,13 @@
   drawing();
 
   function drawing(event) {
+  haveColor = true;
+  if (ctx.strokeStyle == canvas.backgroundColor) {
+  ctx.strokeStyle = pencilColor;
+  if (!pencilColor) {
+  ctx.strokeStyle = "#000000";
+  }
+  }
   canvas.addEventListener("mousedown", startDrawing);
   document.addEventListener("mouseup", endDrawing);
   canvas.addEventListener("mousemove", continueDrawing);
@@ -94,7 +104,10 @@
   // Changing colors
   document.querySelectorAll(".color").forEach(link => {
   link.addEventListener("click", function(event) {
+  if (haveColor) {
   ctx.strokeStyle = this.style.backgroundColor;
+  pencilColor = this.style.backgroundColor;
+  }
   })
   })
 
@@ -115,7 +128,13 @@
 
   selector.addEventListener("click", removeDraw);
   pencil.addEventListener("click", drawing);
-  eraser.addEventListener("click", removeDraw);
+
+  eraser.addEventListener("click", function(event) {
+  drawing();
+  haveColor = false;
+  ctx.strokeStyle = canvas.backgroundColor;
+  })
+
   square.addEventListener("click", removeDraw);
   circle.addEventListener("click", removeDraw);
   magic.addEventListener("click", removeDraw);
