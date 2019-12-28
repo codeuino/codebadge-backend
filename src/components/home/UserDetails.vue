@@ -2,11 +2,9 @@
   <div>
     <v-card flat ripple>
       <v-layout justify-center row>
-        <v-flex>
           <v-avatar size="80">
             <img :src="userData.dp">
           </v-avatar>
-        </v-flex>
         <v-flex>
           <div class="username ml-3">{{userData.username}}</div>
           <div class="github-name ml-3">{{userData.githubName}}</div>

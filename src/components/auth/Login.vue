@@ -35,7 +35,6 @@ export default {
     const code = window.location.href.match(/\?code=(.*)/);
     if (code) {
       this.isLoading = true;
-      console.log(this.isLoading);
       axios({
         method: `post`,
         url: `${AxiosHelper.gatekeeperUrl}?client_id=${

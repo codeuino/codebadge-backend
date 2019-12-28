@@ -1,6 +1,6 @@
 <template>
   <v-toolbar color="white" app>
-    <v-toolbar-title style="font-size: 30px; font-family: Raleway; padding-right: 20px">
+    <v-toolbar-title class="toolbar">
       <span>Codebadge</span>
     </v-toolbar-title>
     <v-spacer />
@@ -15,6 +15,7 @@
 <script>
 import AxiosHelper from "../../config/AxiosHelper";
 import AuthService from "../../services/authService";
+import axios from 'axios';
 
 const authService = new AuthService();
 
@@ -39,6 +40,12 @@ export default {
 </script>
 
 <style lang="scss" >
+.toolbar {
+  font-size: 30px;
+  font-family: 'Raleway';
+  padding-right: 20px
+}
+
 .toolbar-button {
   padding-top: 5px;
 }
