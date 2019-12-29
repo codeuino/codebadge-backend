@@ -1,20 +1,22 @@
 <template>
   <div>
     <div class="my-3">
-      <div class="mt-5 count">Total repo count: {{repos.length}}</div>
+      <div class="mt-5 count">Repositories: {{ repos.length }}</div>
       <div class="my-5" v-for="repo in repos" :key="repo.name">
-        <div class="repo-name">{{repo.name}}</div>
-        <RepoContributors :orgName="orgName" :repoName="repo.name"/>
+        <v-card flat>
+          <div class="repo-name">{{ repo.name }}</div>
+          <RepoContributors :orgName="orgName" :repoName="repo.name" />
+        </v-card>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import RepoContributors from './RepoContributors.vue';
+import RepoContributors from "./RepoContributors.vue";
 
 export default {
-  name: 'OrgRepos',
+  name: "OrgRepos",
   props: {
     repos: {
       type: Array
