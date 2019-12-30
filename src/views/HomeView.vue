@@ -2,6 +2,9 @@
   <div>
     <v-layout class="ma-5" justify-center>
       <div v-if="!isLoading">
+        <v-btn @click="newBadge" style="margin-bottom: 30px;"
+          >Create a New Badge</v-btn
+        >
         <UserDetails />
         <div class="mt-5 orgs">Organizations</div>
         <OrgList />
@@ -42,6 +45,9 @@ export default {
           process.env.VUE_APP_CLIENT_ID,
         "_blank"
       );
+    },
+    newBadge() {
+      window.location.href = "#/newbadge";
     }
   }
 };
