@@ -30,9 +30,13 @@ For instance, suppose a contributor “X” has been quite active within the com
 ## Setting up the project
 To set up the project, carry out the following steps:
 
-**Step 1:-** clone the repository
+**Step 1:-** fork the repository
+
+**Step 2:-** clone the repository
 
 ``` git clone https://github.com/username/Codebadge.git ``` 
+
+- Remember to replace "username" with your github username in the link above
 
 - Create an [oAuth](https://github.com/settings/developers) application if you haven't already
 
@@ -45,10 +49,10 @@ To set up the project, carry out the following steps:
 VUE_APP_CLIENT_ID=<client id>
 VUE_APP_CLIENT_SECRET=<client secret>
 ```
-**Step 2:-** install frontend dependencies and run frontend server
+**Step 3:-** install frontend dependencies and run frontend server
 ``` npm install && npm run serve```
 
-**Step 3:-** install flask api dependencies and run api
+**Step 4:-** install flask api dependencies and run api
 ``` 
 cd backend
 virtualenv -p python3 venv
