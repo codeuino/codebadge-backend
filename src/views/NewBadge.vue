@@ -63,28 +63,40 @@ window.addEventListener("load", () => {
   }
 
   ctx.strokeStyle = "#000000";
+  ctx.fillStyle = "#000000";
   ctx.lineWidth = 10;
   ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  var posX;
+  var posY;
 
   let shouldPaint = false;
+  let shouldDrawShape = false;
 
   var selector = document.getElementById("selector");
   var pencil = document.getElementById("pencil");
   var eraser = document.getElementById("eraser");
   var square = document.getElementById("square");
+  var roundSquare = document.getElementById("roundSquare");
   var circle = document.getElementById("circle");
-  var magic = document.getElementById("magic");
   var text = document.getElementById("text");
 
-  function startDrawing() {
+  //Allows canvas to be drawn on immediately when page is loaded
+  drawingLines();
+  canvas.addEventListener("mousedown", startLine);
+  document.addEventListener("mouseup", endLine);
+  canvas.addEventListener("mousemove", continueLine);
+
+  //Pencil Drawing
+  function startLine() {
     shouldPaint = true;
     var mousePos = getMousePos(canvas, event);
     ctx.moveTo(mousePos.x, mousePos.y);
     ctx.beginPath();
-    continueDrawing(event);
+    continueLine(event);
   }
 
-  function continueDrawing(event) {
+  function continueLine(event) {
     if (shouldPaint) {
       var mousePos = getMousePos(canvas, event);
       ctx.lineTo(mousePos.x, mousePos.y);
@@ -92,14 +104,62 @@ window.addEventListener("load", () => {
     }
   }
 
-  function endDrawing() {
+  function endLine() {
     shouldPaint = false;
   }
 
-  //Allows user to draw on canvas
-  drawing();
+  //Shapes
+  function startShape() {
+    shouldDrawShape = true;
+    var mousePos = getMousePos(canvas, event);
+    ctx.moveTo(mousePos.x, mousePos.y);
+    posX = mousePos.x;
+    posY = mousePos.y;
+    ctx.beginPath();
+  }
 
-  function drawing() {
+  function drawRect(event) {
+    if (shouldDrawShape) {
+      var mousePos = getMousePos(canvas, event);
+      ctx.fillRect(posX, posY, mousePos.x - posX, mousePos.y - posY);
+    }
+  }
+
+  function drawRoundRect(event) {
+    if (shouldDrawShape) {
+      var mousePos = getMousePos(canvas, event);
+      ctx.lineJoin = "round";
+      ctx.strokeRect(posX, posY, mousePos.x - posX, mousePos.y - posY);
+      ctx.fillRect(posX, posY, mousePos.x - posX, mousePos.y - posY);
+    }
+  }
+
+  function drawEllipse(event) {
+    if (shouldDrawShape) {
+      var mousePos = getMousePos(canvas, event);
+      var rh = (posY - mousePos.y) / 2;
+      var rw = (posX - mousePos.x) / 2;
+      ctx.beginPath();
+      ctx.ellipse(
+        mousePos.x + rw,
+        mousePos.y + rh,
+        Math.abs(rw),
+        Math.abs(rh),
+        0,
+        0,
+        2 * Math.PI
+      );
+      ctx.fill();
+    }
+  }
+
+  function endShape() {
+    shouldDrawShape = false;
+  }
+
+  //Allows user to draw lines or shapes on canvas
+
+  function drawingLines() {
     haveColor = true;
     if (ctx.strokeStyle == canvas.backgroundColor) {
       ctx.strokeStyle = pencilColor;
@@ -107,9 +167,18 @@ window.addEventListener("load", () => {
         ctx.strokeStyle = "#000000";
       }
     }
-    canvas.addEventListener("mousedown", startDrawing);
-    document.addEventListener("mouseup", endDrawing);
-    canvas.addEventListener("mousemove", continueDrawing);
+  }
+
+  function drawingShapes() {
+    haveColor = true;
+    if (ctx.strokeStyle == canvas.backgroundColor) {
+      ctx.fillStyle = pencilColor;
+      ctx.strokeStyle = pencilColor;
+      if (!pencilColor) {
+        ctx.fillStyle = "#000000";
+        ctx.strokeStyle = "#000000";
+      }
+    }
   }
 
   // Changing colors
@@ -118,6 +187,7 @@ window.addEventListener("load", () => {
       if (haveColor) {
         ctx.strokeStyle = this.style.backgroundColor;
         pencilColor = this.style.backgroundColor;
+        ctx.fillStyle = this.style.backgroundColor;
       }
     });
   });
@@ -130,21 +200,59 @@ window.addEventListener("load", () => {
   });
 
   //Activates and deactivates buttons
-  function removeDraw() {
-    canvas.removeEventListener("mousedown", startDrawing);
+  function removeTools() {
+    canvas.removeEventListener("mousedown", startLine);
+    canvas.removeEventListener("mousedown", startShape);
+    canvas.removeEventListener("mouseup", drawRect);
+    canvas.removeEventListener("mouseup", drawRoundRect);
+    canvas.removeEventListener("mouseup", drawEllipse);
   }
 
-  selector.addEventListener("click", removeDraw);
-  pencil.addEventListener("click", drawing);
+  selector.addEventListener("click", removeTools);
+
+  pencil.addEventListener("click", function() {
+    removeTools();
+    drawingLines();
+    canvas.addEventListener("mousedown", startLine);
+    document.addEventListener("mouseup", endLine);
+    canvas.addEventListener("mousemove", continueLine);
+  });
 
   eraser.addEventListener("click", function() {
-    drawing();
+    removeTools();
+    drawingLines();
     haveColor = false;
     ctx.strokeStyle = canvas.backgroundColor;
+    canvas.addEventListener("mousedown", startLine);
+    document.addEventListener("mouseup", endLine);
+    canvas.addEventListener("mousemove", continueLine);
   });
-  square.addEventListener("click", removeDraw);
-  circle.addEventListener("click", removeDraw);
-  magic.addEventListener("click", removeDraw);
-  text.addEventListener("click", removeDraw);
+
+  square.addEventListener("click", function() {
+    removeTools();
+    drawingShapes();
+    canvas.addEventListener("mousedown", startShape);
+    canvas.addEventListener("mouseup", drawRect);
+    document.addEventListener("mouseup", endShape);
+  });
+
+  roundSquare.addEventListener("click", function() {
+    removeTools();
+    drawingShapes();
+    canvas.addEventListener("mousedown", startShape);
+    canvas.addEventListener("mouseup", drawRoundRect);
+    document.addEventListener("mouseup", endShape);
+    console.log("round");
+  });
+
+  circle.addEventListener("click", function() {
+    removeTools();
+    drawingShapes();
+    canvas.addEventListener("mousedown", startShape);
+    canvas.addEventListener("mouseup", drawEllipse);
+    document.addEventListener("mouseup", endShape);
+  });
+
+  text.addEventListener("click", removeTools);
 });
 </script>
