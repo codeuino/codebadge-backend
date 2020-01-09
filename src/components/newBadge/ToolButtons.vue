@@ -8,13 +8,19 @@
       <v-btn id="eraser" color="black" dark
         ><i class="fas fa-eraser"></i
       ></v-btn>
-      <v-btn id="square" color="black" dark
-        ><i class="fas fa-square"></i
-      ></v-btn>
+      <v-btn id="square" color="black" dark>
+        <i class="material-icons">
+          border_style
+        </i>
+      </v-btn>
+      <v-btn id="roundSquare" color="black" dark="">
+        <i class="material-icons">
+          crop_square
+        </i>
+      </v-btn>
       <v-btn id="circle" color="black" dark
         ><i class="fas fa-circle"></i
       ></v-btn>
-      <v-btn id="magic" color="black" dark><i class="fas fa-magic"></i></v-btn>
       <v-btn id="text" color="black" dark>T</v-btn>
     </v-layout>
   </div>
