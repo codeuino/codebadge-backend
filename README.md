@@ -36,7 +36,7 @@ To set up the project, carry out the following steps:
 
 ``` git clone https://github.com/username/Codebadge.git ``` 
 
-- Remember to replace "username" with your github username in the link
+- Remember to replace "username" with your github username in the link above
 
 - Create an [oAuth](https://github.com/settings/developers) application if you haven't already
 
