@@ -20,7 +20,7 @@
             </v-container> 
             <v-container>
               <v-layout justify-center>
-                <button class="upload-button button1" type="submit" >Upload</button>
+                <button class="upload-button button1" type="submit" >Submit Template</button>
               </v-layout>
             </v-container>
         </form>
@@ -34,7 +34,7 @@
     border: none;
     color: white;
     text-align: center;
-    padding: 15px 10px;
+    padding: 15px 27px;
     cursor: pointer;
     display: inline-block;
     font-size: 20px;;
@@ -43,7 +43,7 @@
 .upload-button {
   border: none;
   color: white;
-  padding: 13px 32px;
+  padding: 15px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
