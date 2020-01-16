@@ -4,6 +4,7 @@ from flask_cors import CORS
 import requests
 import numpy as np
 from cv2 import cv2
+from PIL import Image
 from werkzeug.utils import secure_filename
 import os
 app = Flask(__name__,
@@ -30,7 +31,6 @@ def upload():
 
     inputImage = cv2.imread(name)
     inputImageGray = cv2.cvtColor(inputImage, cv2.COLOR_BGR2GRAY)
-
     edges = cv2.Canny(inputImageGray,150,200,apertureSize = 3)
 
     print(edges)
@@ -46,11 +46,28 @@ def upload():
 
     font = cv2.FONT_HERSHEY_SIMPLEX
     cv2.putText(inputImage,"Tracks Detected", (500, 250), font, 0.5, 255)
-
-    cv2.imwrite(temp_path+tempname+'.jpeg',edges)
-    cv2.waitKey(0)
-
+    
     os.remove(name)
 
-    filename=tempname+'.jpeg'
-    return send_file(temp_path+filename,mimetype='image/jpeg')
+    filename=tempname+'.png'    
+    
+    #Following converts white pixels to transparent
+    imagePIL = Image.fromarray(edges)
+    imagePIL = imagePIL.convert("RGBA")
+    datas = imagePIL.getdata()
+    
+    newData = []
+    for item in datas:
+        if item[0] == 255 and item[1] == 255 and item[2] == 255:
+            newData.append((255, 255, 255, 0))
+        else:
+            if item[0] > 150:
+                newData.append((0, 0, 0, 255))
+            else:
+                newData.append(item)
+    
+    
+    imagePIL.putdata(newData)
+    imagePIL.save(temp_path+filename, "PNG")    
+    
+    return send_file(temp_path+filename,mimetype='image/png')
