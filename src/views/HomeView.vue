@@ -11,6 +11,8 @@
         <div>
           <v-btn @click="addOrganization">Add access to an Organization</v-btn>
         </div>
+        <div class="mt-5 orgs">Upload Template</div>
+        <v-btn @click="upload">Upload</v-btn>
       </div>
       <div v-if="isLoading">
         <img src="@/assets/loaders/block.svg" alt="loading..." />
@@ -39,6 +41,7 @@ export default {
     this.$store.dispatch("loadUserOrgs");
   },
   methods: {
+
     addOrganization() {
       window.open(
         "https://github.com/settings/connections/applications/" +
@@ -48,7 +51,10 @@ export default {
     },
     newBadge() {
       window.location.href = "#/newbadge";
-    }
+    },
+      upload() {
+      window.location.href = "#/upload";
+    },
   }
 };
 </script>
