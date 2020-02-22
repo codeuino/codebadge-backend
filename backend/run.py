@@ -88,8 +88,6 @@ def getColour(csv,R,G,B):
 
 @app.route('/api/picktool',methods=['GET','POST'])
 def picktool():
-
-
     data = request.files['image']
     img = Image.open(request.files['image'])
     img = np.array(img)
