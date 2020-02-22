@@ -7,6 +7,8 @@ from cv2 import cv2
 from PIL import Image
 from werkzeug.utils import secure_filename
 import os
+import pandas as pd
+
 app = Flask(__name__,
             static_folder = "./dist/static",
             template_folder = "./dist")
@@ -26,14 +28,14 @@ def upload():
     tempname=request.form['tempname']
     temp_path='../templates/'
     name = f.filename.replace(' ','_')
-    print(tempname)
+    # print(tempname)
     f.save(secure_filename(f.filename))
 
     inputImage = cv2.imread(name)
     inputImageGray = cv2.cvtColor(inputImage, cv2.COLOR_BGR2GRAY)
     edges = cv2.Canny(inputImageGray,150,200,apertureSize = 3)
 
-    print(edges)
+    # print(edges)
     edges = abs(cv2.subtract(255,edges))
 
     minLineLength = 30
@@ -71,3 +73,48 @@ def upload():
     imagePIL.save(temp_path+filename, "PNG")    
     
     return send_file(temp_path+filename,mimetype='image/png')
+
+
+def getColour(csv,R,G,B):
+    minimum = 10000
+    for i in range(len(csv)):
+        d = abs(R- int(csv.loc[i,"R"])) + abs(G- int(csv.loc[i,"G"]))+ abs(B- int(csv.loc[i,"B"]))
+        if(d<=minimum):
+            minimum = d
+            cname = csv.loc[i,"color_name"]
+            hex_code = csv.loc[i,"hex"]
+    return (cname,hex_code)
+
+
+@app.route('/api/picktool',methods=['GET','POST'])
+def picktool():
+
+
+    data = request.files['image']
+    img = Image.open(request.files['image'])
+    img = np.array(img)
+    img = cv2.cvtColor(np.array(img), cv2.COLOR_BGR2RGB)
+
+    x,y,z = np.shape(img)
+    print(x,y,z)
+    # r = g = b = 0
+    xpos = int(request.values['xpos'])
+    ypos = int(request.values['ypos'])
+    
+    if(xpos<x and ypos<y):
+        index = ["color", "color_name", "hex", "R", "G", "B"]
+        csv = pd.read_csv('colors.csv', names=index, header=None)
+
+        b,g,r = img[xpos, ypos]
+        b = int(b)
+        g = int(g)
+        r = int(r)
+
+        name,hex_code = getColour(csv,r, g, b) 
+        colour_info = {'name':name , 'hex':hex_code}
+        return jsonify(colour_info)
+    else:
+        return jsonify({'name':'NONE' , 'hex':'-9999'})
+
+
+    
