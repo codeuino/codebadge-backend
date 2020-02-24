@@ -43,21 +43,6 @@ export default {
   methods: {
     loadOrg() {
       axios
-        .get(`${AxiosHelper.baseUrl}/orgs/${this.name}`, {
-          headers: {
-            Authorization: `token ${authService.getToken()}`
-          }
-        })
-        .then(res => {
-          this.org = res.data;
-          this.loadOrgRepos();
-        })
-        .catch(err => console.log(err));
-    },
-
-    //Can be done in a single call
-    loadOrgRepos() {
-      axios
         .get(`${AxiosHelper.baseUrl}/orgs/${this.name}/repos`, {
           headers: {
             Authorization: `token ${authService.getToken()}`
@@ -66,11 +51,18 @@ export default {
         .then(res => {
           this.isLoading = false;
           this.orgRepos = res.data;
+          this.org = res.data[0].owner;
         })
         .catch(err => console.log(err));
     }
   },
   created() {
+    //Check if everything is actually loaded and app has not been reloaded on user end.
+    if(this.$store.state.user == '')
+    {
+      this.$router.push({ name: "homeView"});
+    }
+
     this.isLoading = true;
     this.loadOrg();
   }

@@ -1,24 +1,23 @@
 <template>
-  <div>
-    <div>
-      <v-layout justify-center>
-        <i class="fab fa-github-square i-github"></i>
-      </v-layout>
-    </div>
-    <v-btn class="btn-login" v-if="!isLoading" outline @click="login">Login with GitHub</v-btn>
-    <v-btn class="btn-login" v-if="isLoading" outline>
-      <img src="@/assets/loaders/bars.svg" alt="loading...">
+  <v-layout align-center justify-center>
+    <v-btn dark class="btn-login" v-if="!isLoading" @click="login">
+      <v-icon dark left>fab fa-github</v-icon>Login with GitHub
     </v-btn>
-  </div>
+    <v-btn dark class="btn-login" v-if="isLoading">
+      <img src="@/assets/loaders/bars.svg" alt="loading..." />
+    </v-btn>
+  </v-layout>
 </template>
 
 <script>
-import axios from 'axios';
-import AuthHelper from '../../config/AuthHelper';
-import AxiosHelper from '../../config/AxiosHelper';
+import axios from "axios";
+import AxiosHelper from "../../config/AxiosHelper";
+import AuthService from "../../services/authService";
+
+const authService = new AuthService();
 
 export default {
-  name: 'Login',
+  name: "Login",
   data() {
     return {
       isLoading: false
@@ -26,21 +25,29 @@ export default {
   },
   methods: {
     login() {
-      window.location = `${AxiosHelper.authUrl}?client_id=${
-        AuthHelper.clientId
-      }&scope=user%20repo%20read:org`;
+      window.location = `${AxiosHelper.authUrl}?client_id=${process.env.VUE_APP_CLIENT_ID}&scope=user%20repo%20read:org`;
     }
   },
-  created() {
+  created: function() {
+    if (authService.isLoggedIn()) {
+      window.location = AxiosHelper.homeUrl;
+    }
     const code = window.location.href.match(/\?code=(.*)/);
     if (code) {
       this.isLoading = true;
-      axios
-        .get(`${AxiosHelper.gatekeeperUrl}/${code[1].slice(0, 20)}`)
+      axios({
+        method: `post`,
+        url: `${AxiosHelper.gatekeeperUrl}?client_id=${
+          process.env.VUE_APP_CLIENT_ID
+        }&client_secret=${
+          process.env.VUE_APP_CLIENT_SECRET
+        }&code=${code[1].slice(0, 20)}`
+      })
         .then(res => {
-          this.isLoading = false;
-          localStorage.setItem('token', res.data.token);
+          var token = res.data.match(/access_token=(.*)/)[1].slice(0, 40);
+          localStorage.setItem("token", token);
           window.location = AxiosHelper.homeUrl;
+          this.isLoading = false;
         })
         .catch(err => {
           this.isLoading = false;
@@ -53,10 +60,11 @@ export default {
 
 <style lang="scss" scoped>
 .i-github {
-  font-size: 64px;
+  font-size: 80px;
 }
 
 .btn-login {
-  width: 170px;
+  width: 200px;
+  height: 40px;
 }
 </style>

@@ -1,0 +1,6 @@
+Flask==1.1.1
+Flask-Cors==3.0.8
+numpy==1.16.5
+opencv-python==4.1.1.26
+requests==2.22.0
+Werkzeug==0.16.0
