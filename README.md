@@ -5,8 +5,9 @@
 ![Language Count](https://img.shields.io/github/languages/count/PrabhaniN/codebadge.svg)
 [![License](https://img.shields.io/github/license/PrabhaniN/codebadge.svg)](https://github.com/PrabhaniN/Codebadge/blob/master/LICENSE)
 
-Oftentimes a project maintainer is unable to manage all of the activity on their own. This project is about tracking the contributor.
-=======
+Well we all have been working in Open Source and committing various Pull requests and issues. Many a times it may happen that a mentor is unable to manage all these activities. So This project is about tracking the contributor as well as its contribution by respective mentors.
+
+
 CodeBadge is a project which takes official GitHub API into consideration and makes a fading badges graph for each organization. This project would be organization-oriented project i.e. each organization will need to serve it on a reserved route, say /codebadge. For eg: If coala wants to integrate CodeBadge, they’ll serve this project on coala.io/codebadge. Our aim is to make CodeBadge as a standard such that people start using it as a measure in order to test their skill level/track their progress in a specific community. For eg, Competitive Coding guys test their skills by asking each other what’s their rank on HackerRank / HackerEarth! Likewise, open-source contributors should start asking, **Hey! What badge did you recently earned on CodeBadge!**
 
 ### Why do we need CodeBadge?
@@ -19,10 +20,11 @@ CodeBadge is a project which takes official GitHub API into consideration and ma
 The other part of this project includes the “notifying moderator” since we see sometimes that there are many PRs being sent, or issues being opened by various people across the globe but there are limited numbers of maintainers merging the PRs. This way organizations usually lose their potential contributors due to following things:
 
 - Their PRs are not being merged
+- They find difficulty in understanding the issue
 - Contributors finding difficulty in understanding the issue
 - They could not reach to expectation
   So this will help the maintainers get notified when they see these people inactive.
-=======
+
 - GitHub Heatmaps are for each person’s profile and can be observed from visiting each contributor’s profile specifically. Whereas, our aim is to show a complete fading graph for an organization, which would hence be capable of showing each contributor’s progress as well.
 - There would be some pre-built badges by us as well as we offer the organization to design their own badges. This can be done by the illustrator which we are developing for this project.
 - Pre-defined badges could be based on some achievement levels like Baby-Steps, Not-a-Newbie, Almost-Pro, Legendary-Committer, etc which could be awarded by setting some convention like a number of merged PRs or difficulty of issues resolved by the person.
@@ -74,7 +76,8 @@ Codebadge has a dashboard, where these badges are placed. Any stack could be use
 
 ## Benefits to the community
 
-Different communities or projects like GirlScript, Summer of Code, Codeheat, GSOC, etc. Will be able to track their contributors and this project will help them not lose potential contributors and select the best from all potential candidates.
+
+Different communities or programs like GirlScript Summer of Code, Codeheat, GSOC, etc would be able to track their contributors and this project will help them by not losing potential contributors and select the best from all potential candidates.
 
 ## Contributions Best Practices
 
