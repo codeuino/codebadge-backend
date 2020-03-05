@@ -4,3 +4,7 @@ numpy==1.16.5
 opencv-python==4.1.1.26
 requests==2.22.0
 Werkzeug==0.16.0
+pandas==1.0.1
+PIL==1.1.7
+Flask-Images==3.0.2
+image==1.5.28
