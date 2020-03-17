@@ -8,6 +8,7 @@ from PIL import Image
 from werkzeug.utils import secure_filename
 import os
 import pandas as pd
+from webhook import issue
 
 app = Flask(__name__,
             static_folder = "./dist/static",
@@ -88,13 +89,11 @@ def getColour(csv,R,G,B):
 
 @app.route('/api/picktool',methods=['GET','POST'])
 def picktool():
-    data = request.files['image']
     img = Image.open(request.files['image'])
     img = np.array(img)
     img = cv2.cvtColor(np.array(img), cv2.COLOR_BGR2RGB)
 
     x,y,z = np.shape(img)
-    print(x,y,z)
     # r = g = b = 0
     xpos = int(request.values['xpos'])
     ypos = int(request.values['ypos'])
@@ -114,5 +113,11 @@ def picktool():
     else:
         return jsonify({'name':'NONE' , 'hex':'-9999'})
 
+@app.route('/issue/template', methods=['POST'])
+def check_issue():
+    text = request.json['text']
+    return jsonify(match=issue.template_match(text))
 
-    
+if __name__ == '__main__':
+  app.run(host='127.0.0.1', port=5000, debug=True)
+ 

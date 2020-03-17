@@ -1,0 +1,52 @@
+{
+  "name": "codebadge-test1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "testing bot for codebadge-bot",
+  "author": "ayushnagar123 <an431999@gmail.com>",
+  "license": "ISC",
+  "repository": "https://github.com/ayushnagar123/codebadge.git",
+  "homepage": "https://github.com/ayushnagar123/codebadge",
+  "bugs": "https://github.com/ayushnagar123/codebadge/issues",
+  "keywords": [
+    "probot",
+    "github",
+    "probot-app"
+  ],
+  "scripts": {
+    "dev": "nodemon",
+    "start": "probot run ./index.js",
+    "lint": "standard --fix",
+    "test": "jest && standard",
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "probot": "^9.5.3"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "nock": "^12.0.0",
+    "nodemon": "^2.0.0",
+    "smee-client": "^1.1.0",
+    "standard": "^14.3.1"
+  },
+  "engines": {
+    "node": ">= 8.3.0"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  },
+  "nodemonConfig": {
+    "exec": "npm start",
+    "watch": [
+      ".env",
+      "."
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
