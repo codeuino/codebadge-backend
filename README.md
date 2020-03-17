@@ -64,11 +64,16 @@ VUE_APP_CLIENT_SECRET=<client secret>
 
 **Step 4:-** install flask api dependencies and run api
 ``` 
-cd backend
-virtualenv -p python3 venv
-source venv/bin/activate
+cd processing
 pip install -r requirements.txt
-FLASK_APP=run.py flask run
+python3 run.py
+```
+
+**Step 5:-** setup codebadge-test1 bot for development
+``` 
+cd bot
+npm i
+nodemon
 ```
 
 ## Stack used
