@@ -69,9 +69,9 @@ pip install -r requirements.txt
 python3 run.py
 ```
 
-**Step 5:-** setup codebadge-test1 bot for development
+**Step 5:-** setup codebadge-bot for development
 ``` 
-cd bot
+cd codebadge-bot
 npm i
 nodemon
 ```
