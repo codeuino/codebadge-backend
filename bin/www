@@ -12,7 +12,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3001');
 app.set('port', port);
 
 /**
@@ -21,6 +21,16 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+var mongoose = require('mongoose');
+//Set up default mongoose connection
+var mongoDB = 'mongodb://127.0.0.1/codebadge';
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+ //Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event (to get notification of connection errors)
+db.on('connected', console.error.bind(console, 'connection successful'));
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -28,6 +38,7 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
 
 /**
  * Normalize a port into a number, string, or false.
@@ -76,6 +87,8 @@ function onError(error) {
       throw error;
   }
 }
+
+
 
 /**
  * Event listener for HTTP server "listening" event.
