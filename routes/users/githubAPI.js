@@ -5,29 +5,32 @@ var session = require('express-session')
 const {github} = require('./../../config/config')
 var clientId=github.clientId
 var clientSecret=github.clientSecret
-
-router.get('/getUserProfile',(req,res)=>{
+let {ErrorHandler,errorHandler} = require('../../_helper/error-handler') 
+router.get('/getUserProfile',(req,res,next)=>{
     username = req.query.username
     get(`https://api.github.com/users/${username}`)
         .then(resp => {
           res.send(resp.data)
         })
-        .catch(err=>res.json({"error":err}))
+        .catch(err=>{
+            throw new ErrorHandler(404,`${username} is not a valid username`)
+        })
+        .catch(error=>next(error))
   })
   
-  router.get('/getUserOrgs',(req,res)=>{
+  router.get('/getUserOrgs',(req,res,next)=>{
       oauth_token=req.query.token
       username=req.query.username
       githubLogin=req.query.githubLogin
-      console.log(githubLogin)
-      console.log("username",req.query.username)
       if(githubLogin=="false"){
-        console.log("! githubLogin is ",githubLogin)
         get(`https://api.github.com/users/${username}/orgs`)
         .then(resp => {
           res.send(resp.data)
         })
-        .catch(err=>res.json({"error":err}))
+        .catch(err=>{
+            throw new ErrorHandler(404,`${username} is not a valid username`)
+        })
+        .catch(error=>next(error))
       }
       else{
         console.log("githubLogin",githubLogin)
@@ -36,7 +39,6 @@ router.get('/getUserProfile',(req,res)=>{
             "Authorization":`token ${oauth_token}`,
           }
         }
-        console.log(config)
         get(`https://api.github.com/user/orgs`,config=config)
         .then(resp => {
           console.log(resp.data.length)
@@ -68,11 +70,14 @@ router.get('/getUserProfile',(req,res)=>{
             res.send(list_orgs)
           })
         })
-        .catch(err=>{console.log(err);res.json({"error":err})})
+        .catch(err=>{
+            throw new ErrorHandler(err.response.status,err.response.statusText)
+        })
+        .catch(error=>next(error))
       }
   })
   
-  router.get('/getUserRepos',(req,res)=>{
+  router.get('/getUserRepos',(req,res,next)=>{
       oauth_token = req.query.token
       let config = {
         headers: {
@@ -86,18 +91,24 @@ router.get('/getUserProfile',(req,res)=>{
         .then(resp => {
           res.send(resp.data)
         })
-        .catch(err=>res.json({"error":err}))
+        .catch(err=>{
+            throw new ErrorHandler(err.response.status,err.response.statusText)
+        })
+        .catch(error=>next(error))
       }
       else{
         get(`https://api.github.com/user/repos`,config=config)
         .then(resp => {
           res.send(resp.data)
         })
-        .catch(err=>res.json({"error":err}))
+        .catch(err=>{
+            throw new ErrorHandler(err.response.status,err.response.statusText)
+        })
+        .catch(error=>next(error))
       }
   })
   
-  router.get('/getUserData',(req,res)=>{
+  router.get('/getUserData',(req,res,next)=>{
       var oauth_token=req.query.token;
       var username=req.query.username;
       var githubLogin = req.query.githubLogin;
@@ -113,7 +124,10 @@ router.get('/getUserProfile',(req,res)=>{
             res.cookie('username',resp.data["login"],{expires: new Date(Date.now() +  + 315360000000)}) //saves username for upcoming queries of logedin user
             res.json(resp.data)
           })
-          .catch(err=>res.sendStatus(400).json({"error":err}))
+          .catch(err=>{
+              throw new ErrorHandler(err.response.status,err.response.statusText)
+          })
+          .catch(error=>next(error))
       }
       else{
         console.log("not github login")
@@ -122,11 +136,14 @@ router.get('/getUserProfile',(req,res)=>{
           res.cookie('username',resp.data["login"],{expires: new Date(Date.now() +  + 315360000000)}) //saves username for upcoming queries of logedin user
           res.json(resp.data)
         })
-        .catch(err=>res.json({"error":err}))
+        .catch(err=>{
+            throw new ErrorHandler(err.response.status,err.response.statusText)
+        })
+        .catch(error=>next(error))
       }
     })
 
-router.get('/auth',(req,res)=>{
+router.get('/auth',(req,res,next)=>{
     const body = {
       client_id: clientId,
       client_secret: clientSecret,
@@ -175,16 +192,22 @@ router.get('/auth',(req,res)=>{
               res.redirect(`http://localhost:3000/org?username=${resp.data["login"]}`)
             }
           })
-          .catch(err=>res.sendStatus(400).json({"error":err}))
-      }).
-      catch(err => {
-        res.status(500).json({"error":err});
-      });
+          .catch(err=>{
+              throw new ErrorHandler(err.response.status,err.response.statusText)
+          })
+          .catch(error=>next(error))
+      })
+      .catch(err=>{
+          throw new ErrorHandler(err.response.status,err.response.statusText)
+      })
+      .catch(error=>next(error))
   })
   
-  router.get('/',(req,res)=>{
+  router.get('/',(req,res,next)=>{
       res.redirect(`https://github.com/login/oauth/authorize?client_id=${clientId}&scope=user`);
   })
-  
+  router.use((err, req, res, next) => {
+    errorHandler(err, res);
+  });
 
 module.exports = router
