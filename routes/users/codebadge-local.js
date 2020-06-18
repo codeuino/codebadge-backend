@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-var axios = require('axios')
+var {get} = require('axios')
 var User = require('../../models/Users.js')
 
 function makeid(length) {
@@ -67,8 +67,7 @@ router.post('/signup',(req,res)=>{
             }
             else{
             console.log(user)
-            axios
-            .get(`https://api.github.com/users/${username}`)
+            get(`https://api.github.com/users/${username}`)
             .then(resp => {
                 user.type=resp.data.type
                 console.log(user)

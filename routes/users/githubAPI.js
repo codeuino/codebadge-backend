@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router()
-const axios = require('axios')
+const {get,post} = require('axios')
 var session = require('express-session')
 const {github} = require('./../../config/config')
 var clientId=github.clientId
@@ -8,8 +8,7 @@ var clientSecret=github.clientSecret
 
 router.get('/getUserProfile',(req,res)=>{
     username = req.query.username
-    axios
-        .get(`https://api.github.com/users/${username}`)
+    get(`https://api.github.com/users/${username}`)
         .then(resp => {
           res.send(resp.data)
         })
@@ -24,8 +23,7 @@ router.get('/getUserProfile',(req,res)=>{
       console.log("username",req.query.username)
       if(githubLogin=="false"){
         console.log("! githubLogin is ",githubLogin)
-        axios
-        .get(`https://api.github.com/users/${username}/orgs`)
+        get(`https://api.github.com/users/${username}/orgs`)
         .then(resp => {
           res.send(resp.data)
         })
@@ -39,8 +37,7 @@ router.get('/getUserProfile',(req,res)=>{
           }
         }
         console.log(config)
-        axios
-        .get(`https://api.github.com/user/orgs`,config=config)
+        get(`https://api.github.com/user/orgs`,config=config)
         .then(resp => {
           console.log(resp.data.length)
           return resp.data
@@ -52,8 +49,7 @@ router.get('/getUserProfile',(req,res)=>{
               "Authorization":`token ${oauth_token}`
             }
           }
-          axios
-          .get(`https://api.github.com/users/${username}/orgs`,config=config)
+          get(`https://api.github.com/users/${username}/orgs`,config=config)
           .then(resp1 => {
             console.log(resp1.data.length)
             var flag,elem;
@@ -86,16 +82,14 @@ router.get('/getUserProfile',(req,res)=>{
       console.log(config)
       username = req.query.username
       if(username!==undefined){
-        axios
-        .get(`https://api.github.com/users/${username}/repos`,config=config)
+        get(`https://api.github.com/users/${username}/repos`,config=config)
         .then(resp => {
           res.send(resp.data)
         })
         .catch(err=>res.json({"error":err}))
       }
       else{
-        axios
-        .get(`https://api.github.com/user/repos`,config=config)
+        get(`https://api.github.com/user/repos`,config=config)
         .then(resp => {
           res.send(resp.data)
         })
@@ -114,8 +108,7 @@ router.get('/getUserProfile',(req,res)=>{
             "Authorization":`token ${oauth_token}`
           }
         }
-        axios
-          .get(`https://api.github.com/user`,config=config)
+        get(`https://api.github.com/user`,config=config)
           .then(resp => {
             res.cookie('username',resp.data["login"],{expires: new Date(Date.now() +  + 315360000000)}) //saves username for upcoming queries of logedin user
             res.json(resp.data)
@@ -124,8 +117,7 @@ router.get('/getUserProfile',(req,res)=>{
       }
       else{
         console.log("not github login")
-        axios
-        .get(`https://api.github.com/users/${username}`)
+        get(`https://api.github.com/users/${username}`)
         .then(resp => {
           res.cookie('username',resp.data["login"],{expires: new Date(Date.now() +  + 315360000000)}) //saves username for upcoming queries of logedin user
           res.json(resp.data)
@@ -143,7 +135,7 @@ router.get('/auth',(req,res)=>{
     };
     
     const opts = { headers: { accept: 'application/json' } };
-    axios.post(`https://github.com/login/oauth/access_token`, body, opts).
+    post(`https://github.com/login/oauth/access_token`, body, opts).
       then(res =>{
         return {token:res.data['access_token'],refresh:res.data['refresh_token']}
       })
@@ -173,8 +165,7 @@ router.get('/auth',(req,res)=>{
           }
         }
         
-        axios
-          .get(`https://api.github.com/user`,config=config)
+        get(`https://api.github.com/user`,config=config)
           .then(resp => {
             res.cookie('username',resp.data["login"],{expires: new Date(Date.now() +  + 315360000000)}) //saves username for upcoming queries of logedin user
             if(resp.data.type=="User"){

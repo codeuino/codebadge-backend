@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router()
-const axios = require('axios')
+const {get} = require('axios')
 var session = require('express-session')
 const {github} = require('./../../config/config')
 var clientId=github.clientId
@@ -13,7 +13,7 @@ router.get('/getOrgMembers',(req,res)=>{
     console.log(username)
     if(githubLogin=="false"){
         console.log(githubLogin)
-        axios.get(`https://api.github.com/orgs/${username}/members`)
+        get(`https://api.github.com/orgs/${username}/members`)
         .then(resp=>{console.log(resp.data);res.json(resp.data)})
         .catch(err=>res.send(err))
     }
@@ -24,7 +24,7 @@ router.get('/getOrgMembers',(req,res)=>{
             }
           }
         console.log(githubLogin,config)
-        axios.get(`https://api.github.com/orgs/${username}/members`,config=config)
+        get(`https://api.github.com/orgs/${username}/members`,config=config)
         .then(resp=>{console.log(resp.data);res.json(resp.data)})
         .catch(err=>res.send(err))
     }
