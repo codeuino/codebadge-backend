@@ -6,6 +6,14 @@ module.exports={
     gmail:{
         clientId:"<google oauth app client id>",
         clientSecret:"<google oauth app client secret>"
+    },
+    local:{
+        local:{
+        fullname:"<your fullname>",
+        username:"<yourgithub username>",
+        password:"<test password for login>",
+        type:"User"
+    }
     }
 }
 
