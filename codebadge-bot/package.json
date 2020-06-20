@@ -1,13 +1,13 @@
 {
-  "name": "codebadge-test1",
+  "name": "codebadge-bot",
   "version": "1.0.0",
   "private": true,
-  "description": "testing bot for codebadge-bot",
+  "description": "A Probot app",
   "author": "ayushnagar123 <an431999@gmail.com>",
   "license": "ISC",
-  "repository": "https://github.com/ayushnagar123/codebadge.git",
-  "homepage": "https://github.com/ayushnagar123/codebadge",
-  "bugs": "https://github.com/ayushnagar123/codebadge/issues",
+  "repository": "https://github.com/ayushnagar123/codebadge-bot.git",
+  "homepage": "https://github.com/ayushnagar123/codebadge-bot",
+  "bugs": "https://github.com/ayushnagar123/codebadge-bot/issues",
   "keywords": [
     "probot",
     "github",
@@ -21,7 +21,6 @@
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "dependencies": {
-    "axios": "^0.19.2",
     "probot": "^9.5.3"
   },
   "devDependencies": {
