@@ -8,12 +8,10 @@ module.exports={
         clientSecret:"<google oauth app client secret>"
     },
     local:{
-        local:{
         fullname:"<your fullname>",
         username:"<yourgithub username>",
         password:"<test password for login>",
         type:"User"
-    }
     }
 }
 
